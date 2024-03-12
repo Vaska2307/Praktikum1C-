@@ -3,7 +3,7 @@ using static System.Console;
 Clear();
 
 Write("Введите число: ");
-int a = int.Parse(Console.ReadLine());
+int a = int.Parse(ReadLine());
 
 
 if ((a % 7 == 0)&&(a % 23 == 0))
