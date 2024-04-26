@@ -2,37 +2,58 @@
 using static System.Console;
 
 Clear();
-WriteLine("Введите через пробел массив: ");
-int[] array = GetArrayFromString(ReadLine());
+WriteLine("Введите через пробел массив: ");// Просим пользователя ввести массив через пробел. 
+//Через WriteLine потому, что массив может быть большим. 
+int[] array = GetArrayFromString(ReadLine());// инициализируем наш массив int[] array. 
+//Вызовим метод (по его имени)  GetArrayFromString. В качестве параметра передадим 
+//туда значение считанное с консоли (ReadLine());
 
-Write("Введите элемент: ");
-int element = int.Parse(ReadLine());
+Write("Введите элемент: "); // просим пользователя ввести нашу переменную el.
+int element = int.Parse(ReadLine());// считаем необходимый нам элемент (назовем его элемент строки)
 
-if(FinedElement(array, element))
+if(FinedElement(array, element))// воспользуемся методом FinedElement. Передаем в параметры метода массив
+// array, и необходимый нам для поиска элемент element
 {
-    WriteLine("Да");
+    WriteLine("Да"); // если это истина выводим Да
 }
 else
 {
-    WriteLine("Нет");
+    WriteLine("Нет"); //иначе else нет 
 }
 
 int[] GetArrayFromString(string stringArray)
 {
-    string[] numS = stringArray.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-    int[] result = new int [numS.Length];
-    for(int i = 0; i < result.Length; i++)
+    string[] numS = stringArray.Split(' ', StringSplitOptions.RemoveEmptyEntries);// Создаем массив строк
+    // string[], даем ему имя numS.  Split это метод позволяет 
+    // по указанному сепаратору или символу разбивать нашу строку, указывается он в одинарных 
+    //кавычках ' ' или '.'
+    // Усли между элементами окажется больше чем один пробел то метод Split вернет нам пустые строки, для того
+    // и когда мы попытемся к нему обратиться компилятор выдаст ошибку, чтобы этого избежать мы 
+    // прибегаем к стандартному параметру StringSplitOptions после этого мы выбираем способ как мы разобьем нашу 
+    // строку, в нашем случае мы выбираем параметр RemoveEmptyEntries - этот параметр позволит удалить из 
+    // полученого массива строк пустые элемент (это нам как раз и нужно)
+
+    int[] result = new int [numS.Length];// теперь мы создаем числовой массив и вернуть его нашему пользователю
+    // int[] result и указываем его размеры равные new int [numS.Length]
+    for(int i = 0; i < result.Length; i++) // теперь осталось считать все элементы строкового массива и 
+    // преобразовать их в числовой массив с помощью цикла for тут уже можно вызвать result.Length,,
+    // i++ - это шагитерации
     {
-        result[i] = int.Parse(numS[i]);  
-    }
+        result[i] = int.Parse(numS[i]); // теперь нужно заполнить элементы массива числами создав стандартый
+        // метод int.Parse так как numS хранит строки, и туда передадим элементы массива (numS[i])
+    }// теперь после выполнения этогоцикла в массиве resulбудет лежать преобразованный набор чисел из 
+    //строкового массива numS
     return result;
 }
 
-bool FinedElement(int[] inArray, int el)
+bool FinedElement(int[] inArray, int el)//bool Ключевое слово типа bool — это псевдоним для типа структуры 
+//System.Boolean .NET, представляющий логическое значение: true или false. Создаем метод с именем FinedElement
+// передаем необходимый нам массив (int[] inArray и число (элемент) которе нам екобходимо найти el
 {
-    foreach(int item in inArray)
+    foreach(int item in inArray) //foreach перебор элементов массива.. int item переменная массива на каждом шаге,, 
+    //in inArray сам массив который будем перебирать
     {
-        if(item == el) return true;
+        if(item == el) return true; // если переменная item == числу которое ищем el то возвращаем return true
     }
-    return false;
+    return false; //если нет то возвращаем return false;
 }
